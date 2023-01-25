@@ -66,6 +66,6 @@ Located under 'Projects' tab on github repo.
 https://github.com/users/francescasuba/projects/3
 
 ## Team Roles
-- Product Owner:
-- Business Logic and Persistence:
-- UI:
+- Product Owner: Alex Hedges
+- Integration Specialist: Francesca Suba
+- UI Specialist: Vyviene Spaulding
