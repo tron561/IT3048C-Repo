@@ -4,7 +4,8 @@ Vyviene Spaulding, Alex Hedges, Francesca Suba
 Inspired by the spontaneous app sensation, BeReal, NewsNow sends a singular, daily notification. It is sent at a different time each day and will prompt the user to read an article (posted within 24 hours of the notification) from a reputable source. NewsNow will track the user's "ReadStreak" with a counter, which signifies how many days in a row the user has stayed up to date on current events. The user will also have an option to refresh the page for a new article if they wish to keep reading. NewsNow's mission is to encourage users to keep track of what is happening around the nation, one article, one day at a time.
 
 ## Storyboard/Wireframe
-![NewsNow Wireframe](https://github.com/tron561/IT3048C-Repo/blob/main/wireframe.png)
+<img src="https://github.com/tron561/IT3048C-Repo/blob/main/wireframe.png" alt="NewsNow Wireframe" width="500">
+
 ## Functional Requirements
 ### Requirement 1
 #### Scenario
