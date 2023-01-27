@@ -68,7 +68,7 @@ As a NewsNow user, I want to be able to log in to my account to keep track of my
 
 
 ## Product and Sprint Backlogs
-Product Backlog: Located under'Projects'
+Product Backlog: Located under 'Projects'
 
 
 [Sprint #1](https://github.com/users/tron561/projects/1)
