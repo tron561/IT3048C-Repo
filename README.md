@@ -71,11 +71,7 @@ As a NewsNow user, I want to be able to log in to my account to keep track of my
 Product Backlog: Located under 'Projects'
 
 
-[Sprint #1](https://github.com/users/tron561/projects/1)
-
-[Sprint #2](https://github.com/users/tron561/projects/2)
-
-[Sprint #3](https://github.com/users/tron561/projects/3)
+[Scrum Board](https://github.com/users/tron561/projects/1)
 
 ## Team Roles
 - Product Owner: Alex Hedges
