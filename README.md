@@ -21,24 +21,20 @@ As a NewsNow user, I want to use a news platform so that I can read daily articl
 - Then: I should recieve a flame point
 ##### 1.3
 - Given: A feed of news articles is availible 
-- When: I claim a flame point
-- Then: I should be prompted to log in 
-##### 1.4
-- Given: A feed of news articles is availible 
 - When: I scroll down on the app
 - Then: The page should be refreshed and a new article should display
-##### 1.5
+##### 1.4
 - Given: 
 - When: 
 - Then: 
 ### Requirement 2
 #### Scenario
-As a NewsNow user, I want ... 
+As a NewsNow user, I want to be able to log in to my account to keep track of my streak of daily articles
 #### Examples:
 ##### 2.1
-- Given: 
-- When: 
-- Then: 
+- Given: A feed of news articles is availible 
+- When: I claim a flame point
+- Then: I should be prompted to log in 
 ##### 2.2
 - Given: 
 - When: 
