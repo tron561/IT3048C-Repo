@@ -32,13 +32,13 @@ As a NewsNow user, I want to use a news platform so that I can read daily articl
 As a NewsNow user, I want to be able to log in to my account to keep track of my streak of daily articles
 #### Examples:
 ##### 2.1
-- Given: A feed of news articles is availible 
+- Given: The option to log in is availible  
 - When: I claim a flame point
 - Then: I should be prompted to log in 
 ##### 2.2
-- Given: 
-- When: 
-- Then: 
+- Given: The option to log in is availible
+- When: I log in
+- Then: I should be able to see my ReadStreak and my account information
 ##### 2.3
 - Given: 
 - When: 
