@@ -23,10 +23,6 @@ As a NewsNow user, I want to use a news platform so that I can read daily articl
 - Given: A feed of news articles is availible 
 - When: I scroll down on the app
 - Then: The page should be refreshed and a new article should display
-##### 1.4
-- Given: 
-- When: 
-- Then: 
 ### Requirement 2
 #### Scenario
 As a NewsNow user, I want to be able to log in to my account to keep track of my streak of daily articles
@@ -39,42 +35,6 @@ As a NewsNow user, I want to be able to log in to my account to keep track of my
 - Given: The option to log in is availible
 - When: I log in
 - Then: I should be able to see my ReadStreak and my account information
-##### 2.3
-- Given: 
-- When: 
-- Then: 
-##### 2.4
-- Given: 
-- When: 
-- Then: 
-##### 2.5
-- Given: 
-- When: 
-- Then: 
-### Requirement 3
-#### Scenario
-As a NewsNow user, I want ... 
-#### Examples:
-##### 3.1
-- Given: 
-- When: 
-- Then: 
-##### 3.2
-- Given: 
-- When: 
-- Then: 
-##### 3.3
-- Given: 
-- When: 
-- Then: 
-##### 3.4
-- Given: 
-- When: 
-- Then: 
-##### 3.5
-- Given: 
-- When: 
-- Then: 
 
 ## Class Diagram
 <img src="https://github.com/tron561/IT3048C-Repo/blob/main/class_diagram.png" alt="NewsNow Class Diagram" width="500">
