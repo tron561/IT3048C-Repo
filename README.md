@@ -83,13 +83,33 @@ As a NewsNow user, I want ...
 ## Class Diagram
 <img src="https://github.com/tron561/IT3048C-Repo/blob/main/class_diagram.png" alt="NewsNow Class Diagram" width="500">
 
-**com.xxx:** desc here
+#### Main
+- Main screen that the end-user will see. Will display main news feed, streak counter, and account.
 
-**com.xxx.service:** desc here
+#### StreakCount
+- Number of consecutive days an end-user has opened the app to view the news.
 
-**com.xxx.dto:** desc here
+#### AccountName
+- Google account of the end-user.
 
-**com.xxx.dao:** desc here
+#### NewsFeed
+- Main news feed that displays content itself, location of content, author and datetime that content was published. 
+
+#### News
+- Noun class that represents news.
+
+#### Account
+- Noun class that represents account. 
+
+#### Streak
+- Noun class that represents streak.
+
+#### NewsDataDAO
+- Interface to pull news data from [newsdata.io](https://newsdata.io/)
+
+#### GooglePlaySSODAO
+- Interface for Google Play Services Signle Sign On.
+
 
 ## Product and Sprint Backlogs
 Located under 'Projects' tab on github repo.
