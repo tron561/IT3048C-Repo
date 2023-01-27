@@ -81,7 +81,7 @@ As a NewsNow user, I want ...
 - Then: 
 
 ## Class Diagram
-![OnTrack Class Diagram](image link here)
+<img src="https://github.com/tron561/IT3048C-Repo/blob/main/class_diagram.png" alt="NewsNow Class Diagram" width="500">
 
 **com.xxx:** desc here
 
