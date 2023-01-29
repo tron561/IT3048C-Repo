@@ -12,15 +12,15 @@ Inspired by the spontaneous app sensation, BeReal, NewsNow sends a singular, dai
 As a NewsNow user, I want to use a news platform so that I can read daily articles and earn points.
 #### Examples:
 ##### 1.1
-- Given: A feed of news articles is availible
+- Given: A feed of news articles is available
 - When: I open the app
 - Then: I should recieve a new article to read for the day
 ##### 1.2
-- Given: A feed of news articles is availible 
+- Given: A feed of news articles is available 
 - When: I open up a new article
 - Then: I should recieve a flame point
 ##### 1.3
-- Given: A feed of news articles is availible 
+- Given: A feed of news articles is available 
 - When: I scroll down on the app
 - Then: The page should be refreshed and a new article should display
 ### Requirement 2
@@ -28,13 +28,17 @@ As a NewsNow user, I want to use a news platform so that I can read daily articl
 As a NewsNow user, I want to be able to log in to my account to keep track of my streak of daily articles
 #### Examples:
 ##### 2.1
-- Given: The option to log in is availible  
+- Given: The option to log in is available  
 - When: I claim a flame point
 - Then: I should be prompted to log in 
 ##### 2.2
-- Given: The option to log in is availible
+- Given: The option to log in is available
 - When: I log in
 - Then: I should be able to see my ReadStreak and my account information
+##### 2.3
+- Given: The option to log in is available
+- When: I click on the notification
+- Then: My ReadStreak count should go up by one
 
 ## Class Diagram
 <img src="https://github.com/tron561/IT3048C-Repo/blob/main/class_diagram.png" alt="NewsNow Class Diagram" width="500">
