@@ -1,7 +1,8 @@
 package app.src.main.java.app.newsnow.dto
 
-import androidx.Entity
-import androidx.PrimaryKey
+import androidx.room.PrimaryKey
+import androidx.room.Entity
+import java.util.*
 
 @Entity(tableName="articles")
 data class Article(
