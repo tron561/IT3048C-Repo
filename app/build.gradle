@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.newsnow'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.newsnow"
         minSdk 30
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -41,7 +41,7 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion '1.5.21'
+        kotlinCompilerVersion '1.8.10'
     }
     packagingOptions {
         resources {
