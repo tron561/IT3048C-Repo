@@ -13,11 +13,12 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = DarkGreen,
+    primary = LightPink,
     primaryVariant = Purple700,
-    secondary = Tan,
-    background = Tan,
-    surface = Tan
+    secondary = Grey,
+    background = Grey,
+    surface = Grey
+
 
 
     /* Other default colors to override
@@ -29,7 +30,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun MyPlantDiaryTheme(
+fun NewsNowTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable() () -> Unit
 ) {
