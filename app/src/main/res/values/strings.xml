@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NewsNow</string>
+    <string name="articleName">Article Name</string>
 </resources>
