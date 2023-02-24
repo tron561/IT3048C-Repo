@@ -2,6 +2,7 @@ package com.newsnow
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.newsnow.service.ArticleService
 import com.newsnow.dto.Article
 import kotlinx.coroutines.launch
