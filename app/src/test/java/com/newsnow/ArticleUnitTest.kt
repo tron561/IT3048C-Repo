@@ -58,7 +58,7 @@ class ArticleUnitTests {
 
         coEvery { mockArticleService.fetchArticles() } returns articles
 
-        mvm = MainViewModel(articleService = mockArticleService)
+        mvm = MainViewModel(articleservice = mockArticleService)
     }
 
     private fun whenArticleServiceFetchArticlesInvoked() {

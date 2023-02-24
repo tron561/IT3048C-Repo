@@ -8,13 +8,17 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import retrofit2.awaitResponse
 
-class ArticleService {
-    suspend fun fetchArticles() : List<Article>? {
-        return withContext(Dispatchers.IO){
+interface IArticleService {
+    suspend fun fetchArticles() : List<Article>?
+}
+
+class ArticleService : IArticleService {
+
+    override suspend fun fetchArticles() : List<Article>? {
+        return withContext(Dispatchers.IO) {
             val service = RetrofitClientInstance.retrofitInstance?.create(IArticleDAO::class.java)
-            val articles = async {service?.getAllArticles()}
-            var result = articles.await()?.awaitResponse()?.body()
-//            updateLocalPlants(result)
+            val countries = async {service?.getAllArticles()}
+            var result = countries.await()?.awaitResponse()?.body()
             return@withContext result
         }
     }
