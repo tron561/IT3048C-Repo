@@ -43,7 +43,7 @@ class ArticleUnitTests {
     }
 
     @Test
-    fun `given a view model with live data when populated with plants then results show eastern redbud` () {
+    fun `given a view model with live data when populated with articles then results show rihanna` () {
         givenViewModelIsInitializedWithMockData()
         whenArticleServiceFetchArticlesInvoked()
         thenResultsShouldContainRihanna()
@@ -51,10 +51,13 @@ class ArticleUnitTests {
 
     private fun givenViewModelIsInitializedWithMockData() {
         val articles = ArrayList<Article>()
-        articles.add(Article("50 ways to recycle", "https://www.nytimes.com", "Jane Doe", "Here are 50 different ways you can practice sustainability.", Date("2023-02-01"), 1))
-        articles.add(Article("Presidential Election", "https://www.nytimes.com", "Jane Doe", "Who will win? Will Joe Biden win a second term?", Date("2023-02-02"), 2))
-        articles.add(Article("Rihanna is BACK", "https://www.nytimes.com", "Jane Doe", "International superstars performs at the Super Bowl Halftime Show.", Date("2023-02-03"), 3))
+        // creating mock list of article items
+        articles.add(Article("50 ways to recycle", "https://www.nytimes.com", "Jane Doe", "Here are 50 different ways you can practice sustainability.", "2023-02-01", 1))
+        articles.add(Article("Presidential Election", "https://www.nytimes.com", "Jane Doe", "Who will win? Will Joe Biden win a second term?", "2023-02-02", 2))
+        articles.add(Article("Rihanna is BACK", "https://www.nytimes.com", "Jane Doe", "International superstars performs at the Super Bowl Halftime Show.", "2023-02-03", 3))
 
+        // initialize mvm
+        mvm = MainViewModel()
 
         coEvery { mockArticleService.fetchArticles() } returns articles
 
@@ -65,6 +68,7 @@ class ArticleUnitTests {
         mvm.fetchArticles()
     }
 
+    // searching for article type that contains rihanna, which is the last article item in the mocked articles
     private fun thenResultsShouldContainRihanna() {
         var allArticles : List<Article>? = ArrayList<Article>()
         val latch = CountDownLatch(1)
