@@ -7,18 +7,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.newsnow.ui.theme.Grey
 import com.newsnow.ui.theme.NewsNowTheme
 
 
@@ -30,11 +27,25 @@ class MainActivity : ComponentActivity() {
                 // surface container background color
                 Surface(color = MaterialTheme.colors.background,
                 modifier = Modifier.fillMaxWidth()){
+                    NavMenu("NewsNow")
                     ArticleInfo()
                 }
             }
         }
     }
+}
+@Composable
+fun NavMenu(appName: String) {
+    TopAppBar(
+        modifier = Modifier.fillMaxWidth(),
+        title = { Text(appName)},
+        backgroundColor = Color(android.graphics.Color.parseColor("#D9D9D9")),
+        actions = {
+            IconButton(onClick = {  }) {
+                Icon(Icons.Default.Person, "Navigation")
+            }
+        }
+    )
 }
 @Composable
 fun ArticleInfo() {
@@ -103,6 +114,7 @@ fun DefaultPreview() {
         // A surface container using the 'background' color from the theme
         Surface(color = MaterialTheme.colors.background,
             modifier = Modifier.fillMaxWidth()) {
+            NavMenu("NewsNow")
             ArticleInfo()
         }
     }
