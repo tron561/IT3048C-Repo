@@ -18,7 +18,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.newsnow.ui.theme.NewsNowTheme
 
-
+/**
+ * Class represents the main activity for the NewsNow app and sets up the UI layout and theme
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +36,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+/**
+ * Creates a TopAppBar with the app title on the left and an account navigation on the right
+ * @param appName name of the application
+ */
 @Composable
 fun NavMenu(appName: String) {
     TopAppBar(
@@ -47,6 +53,9 @@ fun NavMenu(appName: String) {
         }
     )
 }
+/**
+ * Populates page with article data
+ */
 @Composable
 fun ArticleInfo() {
     var articleTitle by remember { mutableStateOf("")}
@@ -106,6 +115,9 @@ fun ArticleInfo() {
         )
     }
 }
+/**
+ * Preview for layout in the IDE without AVD
+ */
 @Preview(name="Light Mode", showBackground=true)
 @Preview(uiMode= Configuration.UI_MODE_NIGHT_YES, showBackground = true, name="Dark Mode")
 @Composable
