@@ -17,9 +17,8 @@ class ArticleService : IArticleService {
     override suspend fun fetchArticles() : List<Article>? {
         return withContext(Dispatchers.IO) {
             val service = RetrofitClientInstance.retrofitInstance?.create(IArticleDAO::class.java)
-            val countries = async {service?.getAllArticles()}
-            var result = countries.await()?.awaitResponse()?.body()
-            return@withContext result
+            val countries = async { service?.getAllArticles() }
+            return@withContext countries.await()?.awaitResponse<ArrayList<Article>>()?.body()
         }
     }
 }
