@@ -74,25 +74,3 @@ fun ArticleInfo(article: Article) {
         )
     }
 }
-
-@Preview(name="Light Mode", showBackground=true)
-@Preview(uiMode= Configuration.UI_MODE_NIGHT_YES, showBackground = true, name="Dark Mode")
-@Composable
-fun DefaultPreview() {
-    NewsNowTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(color = MaterialTheme.colors.background,
-            modifier = Modifier.fillMaxWidth()) {
-            ArticleInfo(
-                Article(
-                    title = "Rihanna is BACK",
-                    link = "https://example.com/rihanna",
-                    creator = "Jane Doe",
-                    full_description = "International superstar performs at the Super Bowl Halftime Show.",
-                    pubDate = "2023-02-23",
-                    id = 1
-                )
-            )
-        }
-    }
-}

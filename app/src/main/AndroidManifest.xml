@@ -14,5 +14,4 @@
         android:theme="@style/Theme.NewsNow"
         tools:targetApi="31" />
 
-
 </manifest>
