@@ -15,6 +15,16 @@ data class Article(
 ) {
     // returns article title and full description
     override fun toString(): String {
-        return "$title $full_description"
+        return "Title: $title\n" +
+                "Description: $full_description\n"
+    }
+
+    //Returns all parameters of an Article
+    fun toStringAll(): String {
+        return "Title: $title\n" +
+                "Link: $link\n" +
+                "Creator: $creator\n" +
+                "Description: $full_description\n" +
+                "Publication Date: $pubDate\n"
     }
 }
