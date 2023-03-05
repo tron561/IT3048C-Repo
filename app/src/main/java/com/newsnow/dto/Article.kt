@@ -15,6 +15,6 @@ data class Article(
 ) {
     // returns article title and full description
     override fun toString(): String {
-        return title + " " + full_description
+        return "$title $full_description"
     }
 }
