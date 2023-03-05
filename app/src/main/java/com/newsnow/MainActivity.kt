@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                             title = "Rihanna is BACK",
                             link = "https://example.com/rihanna",
                             creator = "Jane Doe",
-                            full_description = "International superstar performs at the Super Bowl Halftime Show.",
+                            fullDescription = "International superstar performs at the Super Bowl Halftime Show.",
                             pubDate = "2023-02-23",
                             id = 1
                         )
