@@ -10,6 +10,7 @@ data class Article(
     var link : String,
     var creator : String,
     var full_description : String,
+    //Publication Date
     var pubDate: String,
     @PrimaryKey var id : Int = 0
 ) {
