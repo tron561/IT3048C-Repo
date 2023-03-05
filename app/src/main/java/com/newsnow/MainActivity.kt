@@ -40,33 +40,33 @@ fun ArticleInfo(name : String) {
     // sample text until we learn to put JSON data into the UI
     Column {
         Text(
-            //where its found
+            //where the article is found
             text = "from the NYTimes...",
-            fontSize = 15.sp,
+            fontSize = 15.sp
         )
         Text(
-            // title
+            //article title
             text = "Rihanna is BACK",
             fontSize = 50.sp,
             modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Center
         )
         Text(
-            // author and date
+            //article author and date
             text = "Jane Doe | 02/23/2023",
             fontSize = 17.sp,
             modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Center
         )
         Text(
-            // sub title
+            //article sub title
             text = "International superstars performs at the Super Bowl Halftime Show.",
             fontSize = 23.sp,
             modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Center
         )
         Text(
-            //body text
+            //article body text
             text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula" +
                     " eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient" +
                     " montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, " +
@@ -78,9 +78,7 @@ fun ArticleInfo(name : String) {
                     "tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet." +
                     " Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. ",
             fontSize = 20.sp,
-            modifier = Modifier.fillMaxWidth(),
-
-
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
