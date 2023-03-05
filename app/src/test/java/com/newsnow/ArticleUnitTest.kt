@@ -53,9 +53,27 @@ class ArticleUnitTests {
     private fun givenViewModelIsInitializedWithMockData() {
         val articles = ArrayList<Article>()
         // creating mock list of article items
-        articles.add(Article("50 ways to recycle", "https://www.nytimes.com", "Jane Doe", "Here are 50 different ways you can practice sustainability.", "2023-02-01", 1))
-        articles.add(Article("Presidential Election", "https://www.nytimes.com", "Jane Doe", "Who will win? Will Joe Biden win a second term?", "2023-02-02", 2))
-        articles.add(Article("Rihanna is BACK", "https://www.nytimes.com", "Jane Doe", "International superstars performs at the Super Bowl Halftime Show.", "2023-02-03", 3))
+        articles.add(Article(
+            "50 ways to recycle",
+            "https://www.nytimes.com",
+            "Jane Doe",
+            "Here are 50 different ways you can practice sustainability.",
+            "2023-02-01",
+            1))
+        articles.add(Article(
+            "Presidential Election",
+            "https://www.nytimes.com",
+            "Jane Doe",
+            "Who will win? Will Joe Biden win a second term?",
+            "2023-02-02",
+            2))
+        articles.add(Article(
+            "Rihanna is BACK",
+            "https://www.nytimes.com",
+            "Jane Doe",
+            "International superstars performs at the Super Bowl Halftime Show.",
+            "2023-02-03",
+            3))
 
         // initialize mvm
         mvm = MainViewModel()
