@@ -49,6 +49,7 @@ class ArticleUnitTests {
         thenResultsShouldContainRihanna()
     }
 
+    //Given View Model is Initialized with Mock Data
     private fun givenViewModelIsInitializedWithMockData() {
         val articles = ArrayList<Article>()
         // creating mock list of article items
@@ -64,11 +65,13 @@ class ArticleUnitTests {
         mvm.articleService = mockArticleService
     }
 
+    //When
     private fun whenArticleServiceFetchArticlesInvoked() {
         mvm.fetchArticles()
     }
 
-    // searching for article type that contains rihanna, which is the last article item in the mocked articles
+    //When searching for article type that contains "Rihanna", which is the last article item in the mocked articles
+    //Then
     private fun thenResultsShouldContainRihanna() {
         var allArticles : List<Article>? = ArrayList<Article>()
         val latch = CountDownLatch(1)
