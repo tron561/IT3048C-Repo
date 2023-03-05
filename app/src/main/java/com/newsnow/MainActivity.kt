@@ -67,7 +67,7 @@ fun ArticleInfo(article: Article) {
         )
         Text(
             // sub title
-            text = article.full_description,
+            text = article.fullDescription,
             fontSize = 23.sp,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
