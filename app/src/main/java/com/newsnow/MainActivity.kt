@@ -6,20 +6,21 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import com.newsnow.ui.theme.Grey
+import androidx.compose.ui.unit.dp
 import com.newsnow.ui.theme.NewsNowTheme
 
-
+/**
+ * Class represents the main activity for the NewsNow app and sets up the UI layout and theme
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,42 +29,74 @@ class MainActivity : ComponentActivity() {
                 // surface container background color
                 Surface(color = MaterialTheme.colors.background,
                 modifier = Modifier.fillMaxWidth()){
-                    ArticleInfo("Android")
+                    NavMenu("NewsNow")
+                    ArticleInfo()
                 }
             }
         }
     }
 }
+/**
+ * Creates a TopAppBar with the app title on the left and an account navigation on the right
+ * @param appName name of the application
+ */
 @Composable
-fun ArticleInfo(name : String) {
-    var articleName by remember { mutableStateOf("")}
+fun NavMenu(appName: String) {
+    TopAppBar(
+        modifier = Modifier.fillMaxWidth(),
+        title = { Text(appName)},
+        backgroundColor = Color(android.graphics.Color.parseColor("#D9D9D9")),
+        actions = {
+            IconButton(onClick = {  }) {
+                Icon(Icons.Default.Person, "Navigation")
+            }
+        }
+    )
+}
+/**
+ * Populates page with article data
+ */
+@Composable
+fun ArticleInfo() {
+    var articleTitle by remember { mutableStateOf("")}
     // sample text until we learn to put JSON data into the UI
-    Column {
-        Text(
-            //where its found
-            text = "from the NYTimes...",
-            fontSize = 15.sp,
-        )
+    Column(modifier = Modifier
+        .padding(start = 24.dp, end = 24.dp)) {
         Text(
             // title
             text = "Rihanna is BACK",
-            fontSize = 50.sp,
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-        )
-        Text(
-            // author and date
-            text = "Jane Doe | 02/23/2023",
-            fontSize = 17.sp,
-            modifier = Modifier.fillMaxWidth(),
+            style = MaterialTheme.typography.h4,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 72.dp, bottom = 8.dp),
             textAlign = TextAlign.Center,
         )
         Text(
             // sub title
             text = "International superstars performs at the Super Bowl Halftime Show.",
-            fontSize = 23.sp,
-            modifier = Modifier.fillMaxWidth(),
+            style = MaterialTheme.typography.subtitle1,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
             textAlign = TextAlign.Center,
+        )
+        Text(
+            // author and date
+            text = "Jane Doe | 02/23/2023",
+            style = MaterialTheme.typography.caption,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 4.dp),
+            textAlign = TextAlign.Center,
+        )
+        Text(
+            //where its found
+            text = "Source: NY Times",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 24.dp),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.caption
         )
         Text(
             //body text
@@ -77,13 +110,14 @@ fun ArticleInfo(name : String) {
                     "eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, " +
                     "tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet." +
                     " Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. ",
-            fontSize = 20.sp,
+            style = MaterialTheme.typography.body1,
             modifier = Modifier.fillMaxWidth(),
-
-
         )
     }
 }
+/**
+ * Preview for layout in the IDE without AVD
+ */
 @Preview(name="Light Mode", showBackground=true)
 @Preview(uiMode= Configuration.UI_MODE_NIGHT_YES, showBackground = true, name="Dark Mode")
 @Composable
@@ -92,7 +126,8 @@ fun DefaultPreview() {
         // A surface container using the 'background' color from the theme
         Surface(color = MaterialTheme.colors.background,
             modifier = Modifier.fillMaxWidth()) {
-            ArticleInfo("Android")
+            NavMenu("NewsNow")
+            ArticleInfo()
         }
     }
 }
