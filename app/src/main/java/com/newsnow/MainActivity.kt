@@ -17,14 +17,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.newsnow.ui.theme.NewsNowTheme
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Class represents the main activity for the NewsNow app and sets up the UI layout and theme
  */
 class MainActivity : ComponentActivity() {
+    private val viewModel: MainViewModel by viewModel<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            // TODO: parse in article object from API and put in firestore database?
+            // viewModel.loadNewArticle()
             NewsNowTheme {
                 // surface container background color
                 Surface(color = MaterialTheme.colors.background,
