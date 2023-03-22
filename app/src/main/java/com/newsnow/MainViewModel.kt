@@ -9,11 +9,13 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.newsnow.service.ArticleService
 import com.newsnow.dto.Article
 import kotlinx.coroutines.launch
+import com.newsnow.dto.User
 
 
 class MainViewModel : ViewModel()  {
     var articles : MutableLiveData<List<Article>> = MutableLiveData<List<Article>>()
     var articleService : ArticleService = ArticleService()
+    var user : User? = null
 
     private lateinit var firestore : FirebaseFirestore
 
@@ -30,17 +32,28 @@ class MainViewModel : ViewModel()  {
     }
 
     fun loadNewArticle(article: Article) {
-        TODO("Not yet implemented")
-        val document = if (article.id == null || article.id.isEmpty() ) {
-            firestore.collection("articles").document()
-        } else {
-            firestore.collection("articles").document(article.id.toString())
+        user?.let { user ->
+            TODO("Not yet implemented")
+            val document =
+                if (article.id == null || article.id.isEmpty()) {
+                    firestore.collection("articles").document()
+                } else {
+                    firestore.collection("articles").document(article.id.toString())
+                }
+
+            article.id = document.id
+
+            val handle = document.set(article)
+            handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
+            handle.addOnFailureListener { Log.e("Firebase", "Load Failed $it") }
         }
-
-        article.id = document.id
-
-        val handle = document.set(article)
-        handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
-        handle.addOnFailureListener { Log.e("Firebase", "Load Failed $it") }
+    }
+    fun saveUser () {
+        user?.let {
+                user ->
+            val handle = firestore.collection("users").document(user.uid).set(user)
+            handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
+            handle.addOnFailureListener { Log.e("Firebase", "Save failed $it ") }
+        }
     }
 }

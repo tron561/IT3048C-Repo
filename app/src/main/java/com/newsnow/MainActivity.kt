@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            // TODO: parse in article object from API and put in firestore database?
+            // TODO: parse in article object from API and put in FireStore database?
             // viewModel.loadNewArticle()
             NewsNowTheme {
                 // surface container background color
