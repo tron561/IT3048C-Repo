@@ -34,13 +34,13 @@ class MainViewModel : ViewModel()  {
         val document = if (article.id == null || article.id.isEmpty() ) {
             firestore.collection("articles").document()
         } else {
-            firestore.collection("articles").document(article.id)
+            firestore.collection("articles").document(article.id.toString())
         }
+
         article.id = document.id
+
         val handle = document.set(article)
         handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
         handle.addOnFailureListener { Log.e("Firebase", "Load Failed $it") }
     }
-
-
 }
