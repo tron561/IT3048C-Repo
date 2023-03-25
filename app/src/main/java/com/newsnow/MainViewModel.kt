@@ -25,6 +25,7 @@ class MainViewModel : ViewModel()  {
         firestore = FirebaseFirestore.getInstance()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
     }
+    //WIP -AH
 /*
     fun listenToArticles() {
         user?.let {
