@@ -25,7 +25,7 @@ class MainViewModel : ViewModel()  {
         firestore = FirebaseFirestore.getInstance()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
     }
-
+/*
     fun listenToArticles() {
         user?.let {
                 user ->
@@ -53,6 +53,7 @@ class MainViewModel : ViewModel()  {
         }
 
     }
+    */
     fun fetchArticles() {
         viewModelScope.launch {
             var innerArticles = articleService.fetchArticles()
