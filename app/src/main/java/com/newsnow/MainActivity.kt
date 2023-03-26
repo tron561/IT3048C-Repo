@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     NavMenu("NewsNow")
-                    ArticleInfo()
+                    ArticleInfo(articles)
                 }
             }
         }
@@ -67,13 +67,15 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun ArticleInfo(articles: List<Article> = ArrayList<Article>()) {
         // loop through articles and pull each attribute (title, author,date)
+        println(articles)
+        articles.forEach{
         Column(
             modifier = Modifier
                 .padding(start = 24.dp, end = 24.dp)) {
 
             Text(
                 // title
-                text = "Rihanna is BACK",
+                text = it.title,
                 style = MaterialTheme.typography.h4,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -81,7 +83,7 @@ class MainActivity : ComponentActivity() {
                 textAlign = TextAlign.Center,
             )
             Text(
-                // sub title
+                // link
                 text = "International superstars performs at the Super Bowl Halftime Show.",
                 style = MaterialTheme.typography.subtitle1,
                 modifier = Modifier
@@ -108,7 +110,7 @@ class MainActivity : ComponentActivity() {
                 style = MaterialTheme.typography.caption
             )
             Text(
-                //body text
+                //content
                 text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula" +
                         " eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient" +
                         " montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, " +
@@ -122,6 +124,7 @@ class MainActivity : ComponentActivity() {
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier.fillMaxWidth(),
             )
+        }
         }
     }
 
