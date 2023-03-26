@@ -2,6 +2,7 @@ package com.newsnow
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -17,17 +18,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.newsnow.dto.Article
 import com.newsnow.ui.theme.NewsNowTheme
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Class represents the main activity for the NewsNow app and sets up the UI layout and theme
  */
 class MainActivity : ComponentActivity() {
-    private val viewModel: MainViewModel = MainViewModel()
+    private val viewModel: MainViewModel by viewModel<MainViewModel>()
+    private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            // TODO: parse in article object from API and put in FireStore database?
+            // viewModel.loadNewArticle()
             viewModel.fetchArticles()
             val articles by viewModel.articles.observeAsState(initial = emptyList())
             NewsNowTheme {
@@ -37,7 +48,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     NavMenu("NewsNow")
-                    ArticleInfo(articles)
+                    ArticleInfo()
                 }
             }
         }
@@ -51,10 +62,10 @@ class MainActivity : ComponentActivity() {
     fun NavMenu(appName: String) {
         TopAppBar(
             modifier = Modifier.fillMaxWidth(),
-            title = { Text(appName) },
+            title = { Text(appName)},
             backgroundColor = Color(android.graphics.Color.parseColor("#D9D9D9")),
             actions = {
-                IconButton(onClick = { }) {
+                IconButton(onClick = { signIn() }) {
                     Icon(Icons.Default.Person, "Navigation")
                 }
             }
@@ -65,17 +76,14 @@ class MainActivity : ComponentActivity() {
      * Populates page with article data
      */
     @Composable
-    fun ArticleInfo(articles: List<Article> = ArrayList<Article>()) {
-        // loop through articles and pull each attribute (title, author,date)
-        println(articles)
-        articles.forEach{
-        Column(
-            modifier = Modifier
-                .padding(start = 24.dp, end = 24.dp)) {
-
+    fun ArticleInfo() {
+        var articleTitle by remember { mutableStateOf("")}
+        // sample text until we learn to put JSON data into the UI
+        Column(modifier = Modifier
+            .padding(start = 24.dp, end = 24.dp)) {
             Text(
                 // title
-                text = it.title,
+                text = "Rihanna is BACK",
                 style = MaterialTheme.typography.h4,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -83,7 +91,7 @@ class MainActivity : ComponentActivity() {
                 textAlign = TextAlign.Center,
             )
             Text(
-                // link
+                // sub title
                 text = "International superstars performs at the Super Bowl Halftime Show.",
                 style = MaterialTheme.typography.subtitle1,
                 modifier = Modifier
@@ -110,7 +118,7 @@ class MainActivity : ComponentActivity() {
                 style = MaterialTheme.typography.caption
             )
             Text(
-                //content
+                //body text
                 text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula" +
                         " eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient" +
                         " montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, " +
@@ -125,25 +133,56 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxWidth(),
             )
         }
-        }
     }
-
     /**
      * Preview for layout in the IDE without AVD
      */
-    @Preview(name = "Light Mode", showBackground = true)
-    @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, name = "Dark Mode")
+    @Preview(name="Light Mode", showBackground=true)
+    @Preview(uiMode= Configuration.UI_MODE_NIGHT_YES, showBackground = true, name="Dark Mode")
     @Composable
     fun DefaultPreview() {
         NewsNowTheme {
             // A surface container using the 'background' color from the theme
-            Surface(
-                color = MaterialTheme.colors.background,
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Surface(color = MaterialTheme.colors.background,
+                modifier = Modifier.fillMaxWidth()) {
                 NavMenu("NewsNow")
                 ArticleInfo()
             }
         }
     }
+
+    private fun signIn() {
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build()
+
+        )
+        val signinIntent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .build()
+
+        signInLauncher.launch(signinIntent)
+    }
+
+    private val signInLauncher = registerForActivityResult (
+        FirebaseAuthUIActivityResultContract()
+    ) {
+            res -> this.signInResult(res)
+    }
+
+
+    private fun signInResult(result: FirebaseAuthUIAuthenticationResult) {
+        val response = result.idpResponse
+        if (result.resultCode == RESULT_OK) {
+            firebaseUser = FirebaseAuth.getInstance().currentUser
+        } else {
+            Log.e("MainActivity.kt", "Error logging in " + response?.error?.errorCode)
+
+        }
+    }
 }
+
+
+
+
