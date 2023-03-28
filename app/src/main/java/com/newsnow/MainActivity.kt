@@ -24,6 +24,7 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.newsnow.dto.Article
+import com.newsnow.dto.User
 import com.newsnow.ui.theme.NewsNowTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -176,6 +177,11 @@ class MainActivity : ComponentActivity() {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
             firebaseUser = FirebaseAuth.getInstance().currentUser
+            firebaseUser?.let{
+                val user = User(it.uid, it.displayName)
+                viewModel.user = user
+                viewModel.saveUser()
+            }
         } else {
             Log.e("MainActivity.kt", "Error logging in " + response?.error?.errorCode)
 
