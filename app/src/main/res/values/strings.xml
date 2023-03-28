@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">NewsNow</string>
     <string name="articleName">Article Name</string>
+    <string name="rihannaTitle">Rihanna is BACK</string>
+    <string name="halftimeShow">International superstars performs at the Super Bowl Halftime Show.</string>
+    <string name="janeDoe">Jane Doe | 02/23/2023</string>
+    <string name="nyTimesSource">Source: NY Times</string>
 </resources>

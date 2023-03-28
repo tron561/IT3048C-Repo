@@ -15,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -84,7 +85,7 @@ class MainActivity : ComponentActivity() {
             .padding(start = 24.dp, end = 24.dp)) {
             Text(
                 // title
-                text = "Rihanna is BACK",
+                text = stringResource(R.string.rihannaTitle),
                 style = MaterialTheme.typography.h4,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -93,7 +94,7 @@ class MainActivity : ComponentActivity() {
             )
             Text(
                 // sub title
-                text = "International superstars performs at the Super Bowl Halftime Show.",
+                text = stringResource(R.string.halftimeShow),
                 style = MaterialTheme.typography.subtitle1,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -102,7 +103,7 @@ class MainActivity : ComponentActivity() {
             )
             Text(
                 // author and date
-                text = "Jane Doe | 02/23/2023",
+                text = stringResource(R.string.janeDoe),
                 style = MaterialTheme.typography.caption,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -111,7 +112,7 @@ class MainActivity : ComponentActivity() {
             )
             Text(
                 //where its found
-                text = "Source: NY Times",
+                text = stringResource(R.string.nyTimesSource),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 24.dp),
