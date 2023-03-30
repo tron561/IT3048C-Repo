@@ -13,7 +13,7 @@ import kotlinx.coroutines.tasks.await
 
 class MainViewModel : ViewModel() {
 
-    internal val NEW_ARTICLE = "New Article"
+    internal val newArticle = "New Article"
     var articles: MutableLiveData<List<Article>> = MutableLiveData<List<Article>>(emptyList())
     var articleService: ArticleService = ArticleService()
 
