@@ -71,7 +71,7 @@ class ArticleUnitTests {
         var allArticles : List<Article>? = ArrayList<Article>()
         val latch = CountDownLatch(1)
         val observer = object : Observer<List<Article>> {
-            override fun onChanged(receivedArticles: List<Article>?) {
+            override fun onChanged(receivedArticles: List<Article>) {
                 allArticles = receivedArticles
                 latch.countDown()
                 mvm.articles.removeObserver(this)

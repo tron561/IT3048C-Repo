@@ -21,12 +21,17 @@ class MainViewModel : ViewModel()  {
 
     private lateinit var firestore : FirebaseFirestore
 
+    //TODO: init block below is causing issues for MVM unit tests
     init {
         firestore = FirebaseFirestore.getInstance()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
     }
     //WIP -AH
-/*
+
+    /**
+     * Function listens for any changes to any other changes with user's Firebase DataBase Article documents
+     * To be called in MainActivity if saving functionality is implemented for Articles
+     */
     fun listenToArticles() {
         user?.let {
                 user ->
@@ -54,7 +59,11 @@ class MainViewModel : ViewModel()  {
         }
 
     }
-    */
+
+    /**
+     * @return articles from ArticleService
+     * Adds/Posts Articles to the mutableLiveData<List<Article>>
+     */
     fun fetchArticles() {
         viewModelScope.launch {
             var innerArticles = articleService.fetchArticles()
@@ -62,13 +71,18 @@ class MainViewModel : ViewModel()  {
         }
     }
 
+    /**
+     * Function is called in MainActivity from onCreate
+     *  Saves article based on current Article that is pulled from DB
+     */
     fun loadNewArticle(article: Article) {
-        user?.let { user ->
-            TODO("Not yet implemented")
+        user?.let {
             val document =
                 if (article.id == null || article.id.isEmpty()) {
+                    //creating new article document for DB
                     firestore.collection("articles").document()
                 } else {
+                    //updating the existing article document for DB
                     firestore.collection("articles").document(article.id.toString())
                 }
 
@@ -79,6 +93,11 @@ class MainViewModel : ViewModel()  {
             handle.addOnFailureListener { Log.e("Firebase", "Load Failed $it") }
         }
     }
+
+    /**
+     * Function is called in MainActivity from signInResult function
+     *  part of the signIn intent functionality
+     */
     fun saveUser () {
         user?.let {
                 user ->
