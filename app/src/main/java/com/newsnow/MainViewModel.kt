@@ -79,12 +79,13 @@ class MainViewModel : ViewModel()  {
             handle.addOnFailureListener { Log.e("Firebase", "Load Failed $it") }
         }
     }
-    fun saveUser () {
-        user?.let {
-                user ->
+    fun saveUser(): Boolean {
+        user?.let { user ->
             val handle = firestore.collection("users").document(user.uid).set(user)
             handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
             handle.addOnFailureListener { Log.e("Firebase", "Save failed $it ") }
+            return true
         }
+        return false
     }
 }
