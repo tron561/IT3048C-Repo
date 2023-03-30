@@ -15,7 +15,7 @@ import com.newsnow.dto.User
 class MainViewModel : ViewModel()  {
 
     internal val NEW_ARTICLE = "New Article"
-    var articles : MutableLiveData<List<Article>> = MutableLiveData<List<Article>>()
+    var articles : MutableLiveData<List<Article>> = MutableLiveData<List<Article>>(emptyList())
     var articleService : ArticleService = ArticleService()
     var user : User? = null
 
