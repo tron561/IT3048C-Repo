@@ -17,13 +17,12 @@ class MainViewModel : ViewModel() {
     var articles: MutableLiveData<List<Article>> = MutableLiveData<List<Article>>(emptyList())
     var articleService: ArticleService = ArticleService()
 
-    private lateinit var firestore: FirebaseFirestore
+    private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     var loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
     var error: MutableLiveData<Exception?> = MutableLiveData<Exception?>(null)
 
     init {
-        firestore = FirebaseFirestore.getInstance()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
     }
 
