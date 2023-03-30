@@ -83,7 +83,7 @@ class ArticleUnitTests {
         assertTrue(allArticles!!.isNotEmpty())
         var containsRihanna = false
         allArticles!!.forEach {
-            if (it.title.equals(("Rihanna is BACK")) && it.full_description.equals("International superstars performs at the Super Bowl Halftime Show.")) {
+            if (it.title.equals(("Rihanna is BACK")) && it.fullDescription.equals("International superstars performs at the Super Bowl Halftime Show.")) {
                 containsRihanna = true
             }
         }

@@ -8,12 +8,12 @@ data class Article(
     var title: String,
     var link: String,
     var creator: String,
-    var full_description: String,
+    var fullDescription: String,
     var pubDate: String,
     @PrimaryKey var id: String,
 ) {
     // returns article title and full description
     override fun toString(): String {
-        return "$title $full_description"
+        return "$title $fullDescription"
     }
 }
