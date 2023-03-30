@@ -30,8 +30,6 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             loading.postValue(true)
             try {
-                val innerArticles = articleService.fetchArticles()
-                articles.postValue(innerArticles)
                 loading.postValue(false)
             } catch (e: Exception) {
                 error.postValue(e)
