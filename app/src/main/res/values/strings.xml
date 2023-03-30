@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">NewsNow</string>
     <string name="articleName">Article Name</string>
+    <string name="newsNow">NewsNow</string>
 </resources>
