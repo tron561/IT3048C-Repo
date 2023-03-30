@@ -6,26 +6,68 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
-import com.newsnow.service.ArticleService
 import com.newsnow.dto.Article
+import com.newsnow.service.ArticleService
 import kotlinx.coroutines.launch
-import com.newsnow.dto.User
+import kotlinx.coroutines.tasks.await
 
-
-class MainViewModel : ViewModel()  {
+class MainViewModel : ViewModel() {
 
     internal val NEW_ARTICLE = "New Article"
-    var articles : MutableLiveData<List<Article>> = MutableLiveData<List<Article>>(emptyList())
-    var articleService : ArticleService = ArticleService()
-    var user : User? = null
+    var articles: MutableLiveData<List<Article>> = MutableLiveData<List<Article>>(emptyList())
+    var articleService: ArticleService = ArticleService()
 
-    private lateinit var firestore : FirebaseFirestore
+    private lateinit var firestore: FirebaseFirestore
+
+    var loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
+    var error: MutableLiveData<Exception?> = MutableLiveData<Exception?>(null)
 
     init {
         firestore = FirebaseFirestore.getInstance()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
     }
-    //WIP -AH
+
+    fun fetchArticles() {
+        viewModelScope.launch {
+            loading.postValue(true)
+            try {
+                val innerArticles = articleService.fetchArticles()
+                articles.postValue(innerArticles)
+                loading.postValue(false)
+            } catch (e: Exception) {
+                error.postValue(e)
+                Log.e("MainViewModel", "Error fetching articles: $e")
+                loading.postValue(false)
+            }
+        }
+    }
+
+    fun loadNewArticle(article: Article) {
+        viewModelScope.launch {
+            loading.postValue(true)
+            try {
+                val document = if (article.id == null || article.id.isEmpty()) {
+                    firestore.collection("articles").document()
+                } else {
+                    firestore.collection("articles").document(article.id.toString())
+                }
+
+                article.id = document.id
+
+                document.set(article).await()
+
+                Log.d("Firebase", "Document Saved")
+                loading.postValue(false)
+            } catch (e: Exception) {
+                error.postValue(e)
+                Log.e("MainViewModel", "Error loading new article: $e")
+                loading.postValue(false)
+            }
+        }
+    }
+
+}
+//WIP -AH
 /*
     fun listenToArticles() {
         user?.let {
@@ -52,41 +94,4 @@ class MainViewModel : ViewModel()  {
                 }
             }
         }
-
-    }
-    */
-    fun fetchArticles() {
-        viewModelScope.launch {
-            var innerArticles = articleService.fetchArticles()
-            articles.postValue(innerArticles);
-        }
-    }
-
-    fun loadNewArticle(article: Article) {
-        if (user != null) {
-            val document = if (article.id == null || article.id.isEmpty()) {
-                firestore.collection("articles").document()
-            } else {
-                firestore.collection("articles").document(article.id.toString())
-            }
-
-            article.id = document.id
-
-            val handle = document.set(article)
-            handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
-            handle.addOnFailureListener { Log.e("Firebase", "Load Failed $it") }
-        } else {
-            Log.e("MainViewModel", "User is null in loadNewArticle()")
-        }
-    }
-
-    fun saveUser(): Boolean {
-        user?.let { user ->
-            val handle = firestore.collection("users").document(user.uid).set(user)
-            handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
-            handle.addOnFailureListener { Log.e("Firebase", "Save failed $it ") }
-            return true
-        }
-        return false
-    }
-}
+*/

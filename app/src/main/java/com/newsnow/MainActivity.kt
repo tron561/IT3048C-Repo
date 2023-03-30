@@ -5,19 +5,19 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -41,6 +41,9 @@ class MainActivity : ComponentActivity() {
             // viewModel.loadNewArticle()
             viewModel.fetchArticles()
             val articles by viewModel.articles.observeAsState(initial = emptyList())
+            val loading by viewModel.loading.observeAsState(initial = false)
+            val error by viewModel.error.observeAsState(initial = null)
+
             NewsNowTheme {
                 // surface container background color
                 Surface(
@@ -48,11 +51,28 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     NavMenu("NewsNow")
-                    ArticleInfo()
+                    if (loading) {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
+                    } else if (error != null) {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            Text(
+                                text = "Error: ${error!!.message}",
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
+                    } else {
+                        ArticleInfo(articleList = articles)
+                    }
                 }
             }
         }
     }
+
+
 
     /**
      * Creates a TopAppBar with the app title on the left and an account navigation on the right
@@ -76,64 +96,51 @@ class MainActivity : ComponentActivity() {
      * Populates page with article data
      */
     @Composable
-    fun ArticleInfo() {
-        var articleTitle by remember { mutableStateOf("")}
-        // sample text until we learn to put JSON data into the UI
-        Column(modifier = Modifier
-            .padding(start = 24.dp, end = 24.dp)) {
-            Text(
-                // title
-                text = "Rihanna is BACK",
-                style = MaterialTheme.typography.h4,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 72.dp, bottom = 8.dp),
-                textAlign = TextAlign.Center,
-            )
-            Text(
-                // sub title
-                text = "International superstars performs at the Super Bowl Halftime Show.",
-                style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp),
-                textAlign = TextAlign.Center,
-            )
-            Text(
-                // author and date
-                text = "Jane Doe | 02/23/2023",
-                style = MaterialTheme.typography.caption,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 4.dp),
-                textAlign = TextAlign.Center,
-            )
-            Text(
-                //where its found
-                text = "Source: NY Times",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 24.dp),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.caption
-            )
-            Text(
-                //body text
-                text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula" +
-                        " eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient" +
-                        " montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, " +
-                        "pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, " +
-                        "aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis " +
-                        "vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus." +
-                        " Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor " +
-                        "eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, " +
-                        "tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet." +
-                        " Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. ",
-                style = MaterialTheme.typography.body1,
-                modifier = Modifier.fillMaxWidth(),
-            )
+    fun ArticleInfo(articleList: List<Article>) {
+        Column(modifier = Modifier.padding(start = 24.dp, end = 24.dp)) {
+            for (article in articleList) {
+                Text(
+                    text = article.title,
+                    style = MaterialTheme.typography.h4,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 72.dp, bottom = 8.dp),
+                    textAlign = TextAlign.Center,
+                )
+                Text(
+                    text = article.fullDescription,
+                    style = MaterialTheme.typography.subtitle1,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp),
+                    textAlign = TextAlign.Center,
+                )
+                Text(
+                    text = "${article.creator} | ${article.pubDate}",
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 4.dp),
+                    textAlign = TextAlign.Center,
+                )
+                Text(
+                    text = "Source: ${article.link}",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 24.dp),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.caption
+                )
+                Text(
+                    text = article.content,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.body1
+                )
+            }
         }
     }
+
     /**
      * Preview for layout in the IDE without AVD
      */
@@ -146,7 +153,7 @@ class MainActivity : ComponentActivity() {
             Surface(color = MaterialTheme.colors.background,
                 modifier = Modifier.fillMaxWidth()) {
                 NavMenu("NewsNow")
-                ArticleInfo()
+                //ArticleInfo(articleList = articles)
             }
         }
     }

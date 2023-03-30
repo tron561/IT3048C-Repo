@@ -10,6 +10,7 @@ data class Article(
     var creator: String,
     var fullDescription: String,
     var pubDate: String,
+    var content: String,
     @PrimaryKey var id: String,
 ) {
     // returns article title and full description
