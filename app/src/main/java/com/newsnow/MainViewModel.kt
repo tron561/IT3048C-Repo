@@ -26,12 +26,12 @@ class MainViewModel : ViewModel()  {
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
     }
     //WIP -AH
-/*
+
     fun listenToArticles() {
         user?.let {
-                user ->
-            firestore.collection("users").document(user.uid).collection("articles").addSnapshotListener {
-                    snapshot, e ->
+            user ->
+            firestore.collection("users").document(user.uid).collection("articles")
+                .addSnapshotListener { snapshot, e ->
                 // handle the error if there is one, and then return
                 if (e != null) {
                     Log.w("Listen failed", e)
@@ -52,9 +52,8 @@ class MainViewModel : ViewModel()  {
                 }
             }
         }
-
     }
-    */
+
     fun fetchArticles() {
         viewModelScope.launch {
             var innerArticles = articleService.fetchArticles()
