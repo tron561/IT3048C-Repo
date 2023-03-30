@@ -63,22 +63,23 @@ class MainViewModel : ViewModel()  {
     }
 
     fun loadNewArticle(article: Article) {
-        user?.let { user ->
-            TODO("Not yet implemented")
-            val document =
-                if (article.id == null || article.id.isEmpty()) {
-                    firestore.collection("articles").document()
-                } else {
-                    firestore.collection("articles").document(article.id.toString())
-                }
+        if (user != null) {
+            val document = if (article.id == null || article.id.isEmpty()) {
+                firestore.collection("articles").document()
+            } else {
+                firestore.collection("articles").document(article.id.toString())
+            }
 
             article.id = document.id
 
             val handle = document.set(article)
             handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
             handle.addOnFailureListener { Log.e("Firebase", "Load Failed $it") }
+        } else {
+            Log.e("MainViewModel", "User is null in loadNewArticle()")
         }
     }
+
     fun saveUser(): Boolean {
         user?.let { user ->
             val handle = firestore.collection("users").document(user.uid).set(user)
