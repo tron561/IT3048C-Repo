@@ -11,11 +11,9 @@ import junit.framework.Assert.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.*
 import org.junit.rules.TestRule
-import java.util.*
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
@@ -85,7 +83,7 @@ class ArticleUnitTests {
         assertTrue(allArticles!!.isNotEmpty())
         var containsRihanna = false
         allArticles!!.forEach {
-            if (it.title.equals(("Rihanna is BACK")) && it.full_description.equals("International superstars performs at the Super Bowl Halftime Show.")) {
+            if (it.title.equals(("Rihanna is BACK")) && it.fullDescription.equals("International superstars performs at the Super Bowl Halftime Show.")) {
                 containsRihanna = true
             }
         }
