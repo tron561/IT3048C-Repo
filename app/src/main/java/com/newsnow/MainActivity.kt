@@ -99,7 +99,7 @@ class MainActivity : ComponentActivity() {
                 textAlign = TextAlign.Center,
             )
             Text(
-                //where its found
+                // where its found
                 text = "Source: NY Times",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -108,7 +108,7 @@ class MainActivity : ComponentActivity() {
                 style = MaterialTheme.typography.caption
             )
             Text(
-                //body text
+                // body text
                 text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula" +
                         " eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient" +
                         " montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, " +
