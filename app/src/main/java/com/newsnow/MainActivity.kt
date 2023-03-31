@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     navMenu("NewsNow")
-                    ArticleInfo()
+                    articleInfo()
                 }
             }
         }
@@ -65,7 +65,7 @@ class MainActivity : ComponentActivity() {
      * Populates page with article data
      */
     @Composable
-    fun ArticleInfo(articles: List<Article> = ArrayList<Article>()) {
+    fun articleInfo(articles: List<Article> = ArrayList<Article>()) {
         // loop through articles and pull each attribute (title, author,date)
         Column(
             modifier = Modifier
@@ -139,7 +139,7 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 navMenu("NewsNow")
-                ArticleInfo()
+                articleInfo()
             }
         }
     }
