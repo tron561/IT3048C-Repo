@@ -2,7 +2,6 @@ package com.newsnow.dto
 
 import androidx.room.PrimaryKey
 import androidx.room.Entity
-
 @Entity(tableName="articles")
 data class Article(
     var title : String = "",

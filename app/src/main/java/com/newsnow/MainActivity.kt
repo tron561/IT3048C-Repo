@@ -63,6 +63,7 @@ class MainActivity : ComponentActivity() {
 
     /**
      * Populates page with article data
+     * @param articles list of Article objects
      */
     @Composable
     fun articleInfo(articles: List<Article> = ArrayList<Article>()) {
