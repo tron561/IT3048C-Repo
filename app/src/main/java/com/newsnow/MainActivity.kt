@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    NavMenu("NewsNow")
+                    navMenu("NewsNow")
                     ArticleInfo()
                 }
             }
@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
      * @param appName name of the application
      */
     @Composable
-    fun NavMenu(appName: String) {
+    fun navMenu(appName: String) {
         TopAppBar(
             modifier = Modifier.fillMaxWidth(),
             title = { Text(appName) },
@@ -138,7 +138,7 @@ class MainActivity : ComponentActivity() {
                 color = MaterialTheme.colors.background,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                NavMenu("NewsNow")
+                navMenu("NewsNow")
                 ArticleInfo()
             }
         }
