@@ -131,7 +131,7 @@ class MainActivity : ComponentActivity() {
     @Preview(name = "Light Mode", showBackground = true)
     @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, name = "Dark Mode")
     @Composable
-    fun DefaultPreview() {
+    fun defaultPreview() {
         NewsNowTheme {
             // A surface container using the 'background' color from the theme
             Surface(
