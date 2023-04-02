@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.newsnow.service.ArticleService
@@ -42,21 +44,17 @@ class MainViewModel : ViewModel()  {
 
     fun loadNewArticle(article: Article) {
         user?.let { user ->
-            TODO("Not yet implemented")
-            val document =
-                if (article.id == null || article.id.isEmpty()) {
-                    firestore.collection("articles").document()
+            val document = createArticleDocument(article)
+            saveDocument(document, article).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("Firebase", "Document saved")
                 } else {
-                    firestore.collection("articles").document(article.id.toString())
+                    Log.e("Firebase", "Load failed", task.exception)
                 }
-
-            article.id = document.id
-
-            val handle = document.set(article)
-            handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
-            handle.addOnFailureListener { Log.e("Firebase", "Load Failed $it") }
+            }
         }
     }
+
     fun saveUser () {
         user?.let {
                 user ->
@@ -64,5 +62,15 @@ class MainViewModel : ViewModel()  {
             handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
             handle.addOnFailureListener { Log.e("Firebase", "Save failed $it ") }
         }
+    }
+
+    private fun createArticleDocument(article: Article): DocumentReference {
+        val collection = firestore.collection("articles")
+        val documentId = article.id
+        return collection.document(documentId)
+    }
+
+    private fun saveDocument(document: DocumentReference, article: Article): Task<Void> {
+        return document.set(article)
     }
 }
