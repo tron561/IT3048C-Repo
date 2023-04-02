@@ -24,6 +24,8 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.newsnow.dto.Article
+import com.newsnow.ui.theme.Grey
+import com.newsnow.ui.theme.LightGrey
 import com.newsnow.ui.theme.NewsNowTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,7 +34,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModel<MainViewModel>()
-    private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +48,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    NavMenu("NewsNow")
+                    NavMenu("NewsNow", LightGrey)
                     ArticleInfo()
                 }
             }
@@ -59,11 +60,11 @@ class MainActivity : ComponentActivity() {
      * @param appName name of the application
      */
     @Composable
-    fun NavMenu(appName: String) {
+    fun NavMenu(appName: String, backgroundColor: Color) {
         TopAppBar(
             modifier = Modifier.fillMaxWidth(),
             title = { Text(appName)},
-            backgroundColor = Color(android.graphics.Color.parseColor("#D9D9D9")),
+            backgroundColor = backgroundColor,
             actions = {
                 IconButton(onClick = { signIn() }) {
                     Icon(Icons.Default.Person, "Navigation")
@@ -145,11 +146,12 @@ class MainActivity : ComponentActivity() {
             // A surface container using the 'background' color from the theme
             Surface(color = MaterialTheme.colors.background,
                 modifier = Modifier.fillMaxWidth()) {
-                NavMenu("NewsNow")
+                NavMenu("NewsNow", LightGrey)
                 ArticleInfo()
             }
         }
     }
+    private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
     private fun signIn() {
         val providers = arrayListOf(
@@ -174,7 +176,7 @@ class MainActivity : ComponentActivity() {
 
     private fun signInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
-        if (result.resultCode == RESULT_OK) {
+        if (result.resultCode == ComponentActivity.RESULT_OK) {
             firebaseUser = FirebaseAuth.getInstance().currentUser
         } else {
             Log.e("MainActivity.kt", "Error logging in " + response?.error?.errorCode)
@@ -182,7 +184,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-
-
-
