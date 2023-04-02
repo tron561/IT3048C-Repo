@@ -34,6 +34,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModel<MainViewModel>()
+    private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -151,8 +153,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-    private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
-
     private fun signIn() {
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(),
