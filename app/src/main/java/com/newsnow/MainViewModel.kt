@@ -25,36 +25,10 @@ class MainViewModel : ViewModel()  {
         firestore = FirebaseFirestore.getInstance()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
     }
-    //WIP -AH
-/*
-    fun listenToArticles() {
-        user?.let {
-                user ->
-            firestore.collection("users").document(user.uid).collection("articles").addSnapshotListener {
-                    snapshot, e ->
-                // handle the error if there is one, and then return
-                if (e != null) {
-                    Log.w("Listen failed", e)
-                    return@addSnapshotListener
-                }
-                // if we reached this point , there was not an error
-                snapshot?.let {
-                    val allArticles = ArrayList<Article>()
-                    allArticles.add(Article(title = NEW_ARTICLE))
-                    val documents = snapshot.documents
-                    documents.forEach {
-                        val article = it.toObject(Article::class.java)
-                        article?.let {
-                            allArticles.add(it)
-                        }
-                    }
-                    articles.value = allArticles
-                }
-            }
-        }
+    // TODO: listenToArticles()
+    //  listens to a Firestore collection called "articles" for changes and updates a LiveData object articles.value
+    //  with the latest articles from the collection.
 
-    }
-    */
     fun fetchArticles() {
         viewModelScope.launch {
             var innerArticles = articleService.fetchArticles()
