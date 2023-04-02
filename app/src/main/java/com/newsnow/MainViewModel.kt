@@ -31,8 +31,12 @@ class MainViewModel : ViewModel()  {
 
     fun fetchArticles() {
         viewModelScope.launch {
-            var innerArticles = articleService.fetchArticles()
-            articles.postValue(innerArticles);
+            try {
+                var innerArticles = articleService.fetchArticles()
+                articles.postValue(innerArticles)
+            } catch (e: Exception) {
+                Log.e("Firebase", "Fetch failed", e)
+            }
         }
     }
 
