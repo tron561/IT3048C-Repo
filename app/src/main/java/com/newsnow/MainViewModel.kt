@@ -55,14 +55,19 @@ class MainViewModel : ViewModel()  {
         }
     }
 
-    fun saveUser () {
-        user?.let {
-                user ->
-            val handle = firestore.collection("users").document(user.uid).set(user)
-            handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
-            handle.addOnFailureListener { Log.e("Firebase", "Save failed $it ") }
+    fun saveUser() {
+        user?.let { user ->
+            val document = firestore.collection("users").document(user.uid)
+            saveUser(document, user).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("Firebase", "Document saved")
+                } else {
+                    Log.e("Firebase", "Save failed", task.exception)
+                }
+            }
         }
     }
+
 
     private fun createArticleDocument(article: Article): DocumentReference {
         val collection = firestore.collection("articles")
@@ -72,5 +77,9 @@ class MainViewModel : ViewModel()  {
 
     private fun saveDocument(document: DocumentReference, article: Article): Task<Void> {
         return document.set(article)
+    }
+
+    private fun saveUser(document: DocumentReference, user: User): Task<Void> {
+        return document.set(user)
     }
 }
