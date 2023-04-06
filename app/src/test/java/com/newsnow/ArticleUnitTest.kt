@@ -71,10 +71,14 @@ class ArticleUnitTests {
         var allArticles : List<Article>? = ArrayList<Article>()
         val latch = CountDownLatch(1)
         val observer = object : Observer<List<Article>> {
-            override fun onChanged(receivedArticles: List<Article>?) {
+            fun onChanged(receivedArticles: List<Article>?) {
                 allArticles = receivedArticles
                 latch.countDown()
                 mvm.articles.removeObserver(this)
+            }
+
+            override fun onChanged(value: List<Article>) {
+                TODO("Not yet implemented")
             }
         }
         mvm.articles.observeForever(observer)
@@ -83,7 +87,7 @@ class ArticleUnitTests {
         assertTrue(allArticles!!.isNotEmpty())
         var containsRihanna = false
         allArticles!!.forEach {
-            if (it.title.equals(("Rihanna is BACK")) && it.full_description.equals("International superstars performs at the Super Bowl Halftime Show.")) {
+            if (it.title.equals(("Rihanna is BACK")) && it.fullDescription.equals("International superstars performs at the Super Bowl Halftime Show.")) {
                 containsRihanna = true
             }
         }
