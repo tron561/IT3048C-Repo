@@ -40,7 +40,7 @@ interface IArticleService {
 /**
  * A public Api object that exposes the lazy-initialized Retrofit service
  */
-object MarsApi {
+object ArticlesApi {
     val retrofitService: ArticleService by lazy { retrofit.create(ArticleService::class.java) }
 }
 
