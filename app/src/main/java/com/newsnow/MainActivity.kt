@@ -83,7 +83,7 @@ class MainActivity : ComponentActivity() {
             .padding(start = 24.dp, end = 24.dp)) {
             Text(
                 // title
-                text = "Rihanna is BACK",
+                text = articleTitle,
                 style = MaterialTheme.typography.h4,
                 modifier = Modifier
                     .fillMaxWidth()
