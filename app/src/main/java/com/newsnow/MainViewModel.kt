@@ -48,36 +48,6 @@ class MainViewModel : ViewModel()  {
         }
     }
 
-    //WIP -AH
-/*
-    fun listenToArticles() {
-        user?.let {
-                user ->
-            firestore.collection("users").document(user.uid).collection("articles").addSnapshotListener {
-                    snapshot, e ->
-                // handle the error if there is one, and then return
-                if (e != null) {
-                    Log.w("Listen failed", e)
-                    return@addSnapshotListener
-                }
-                // if we reached this point , there was not an error
-                snapshot?.let {
-                    val allArticles = ArrayList<Article>()
-                    allArticles.add(Article(title = NEW_ARTICLE))
-                    val documents = snapshot.documents
-                    documents.forEach {
-                        val article = it.toObject(Article::class.java)
-                        article?.let {
-                            allArticles.add(it)
-                        }
-                    }
-                    articles.value = allArticles
-                }
-            }
-        }
-
-    }
-    */
     fun fetchArticles() {
         viewModelScope.launch {
             var innerArticles = articleService.fetchArticles()
