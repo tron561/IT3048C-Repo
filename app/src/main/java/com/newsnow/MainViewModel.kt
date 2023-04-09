@@ -20,6 +20,7 @@ class MainViewModel : ViewModel()  {
     var articles : MutableLiveData<List<Article>> = MutableLiveData<List<Article>>()
     var articleService : ArticleService = ArticleService()
     var user : User? = null
+    var counter = 0
 
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<String>()
@@ -79,5 +80,9 @@ class MainViewModel : ViewModel()  {
             handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
             handle.addOnFailureListener { Log.e("Firebase", "Save failed $it ") }
         }
+    }
+    fun saveCounter(){
+        // if user count is empty
+        //if existing counter
     }
 }

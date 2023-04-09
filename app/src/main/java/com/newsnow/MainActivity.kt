@@ -78,6 +78,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun ArticleInfo() {
         var articleTitle by remember { mutableStateOf("")}
+        var counter = 0
         // sample text until we learn to put JSON data into the UI
         Column(modifier = Modifier
             .padding(start = 24.dp, end = 24.dp)) {
@@ -132,6 +133,12 @@ class MainActivity : ComponentActivity() {
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier.fillMaxWidth(),
             )
+            Button(onClick = {
+                signIn()
+                viewModel.saveCounter() })
+            {
+                Text(text = "Save")
+            }
         }
     }
     /**
