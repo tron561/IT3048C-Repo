@@ -41,6 +41,14 @@ class MainActivity : AppCompatActivity() {
         makeAPIRequest()
     }
 
+    //fade in animation from bumptech
+    private fun fadeIn() {
+        binding.vBlackScreen.animate().apply {
+            alpha(0)
+            duration = 3000
+        }.start()
+    }
+
     //requests data from the API via Retrofit
     private fun makeAPIRequest() {
         binding.progressBar.visibility = View.VISIBLE
@@ -63,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                 //updates ui when data has been retrieved
                 withContext(Dispatchers.Main) {
                     setUpRecyclerView()
+                    fadeIn()
                     binding.progressBar.visibility = View.GONE
                 }
             } catch (e: Exception) {
