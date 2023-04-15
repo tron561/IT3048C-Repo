@@ -26,7 +26,6 @@ class RecyclerAdapter(
         val itemDetail: TextView = itemView.findViewById(R.id.tv_description)
         val itemPicture: ImageView = itemView.findViewById(R.id.iv_image)
 
-        //takes care of click events
         init {
             itemView.setOnClickListener { v: View ->
                 val position: Int = absoluteAdapterPosition

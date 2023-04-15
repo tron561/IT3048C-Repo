@@ -41,15 +41,7 @@ class MainActivity : AppCompatActivity() {
         makeAPIRequest()
     }
 
-    //simple fade in animation for when the app is done loading
-    private fun fadeIn() {
-        binding.vBlackScreen.animate().apply {
-            alpha(0)
-            duration = 3000
-        }.start()
-    }
-
-    //requests data from the api and forwards it to the recycler view
+    //requests data from the API via Retrofit
     private fun makeAPIRequest() {
         binding.progressBar.visibility = View.VISIBLE
 
@@ -71,7 +63,6 @@ class MainActivity : AppCompatActivity() {
                 //updates ui when data has been retrieved
                 withContext(Dispatchers.Main) {
                     setUpRecyclerView()
-                    fadeIn()
                     binding.progressBar.visibility = View.GONE
                 }
             } catch (e: Exception) {
@@ -107,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvRecyclerView.adapter = RecyclerAdapter(titlesList, descList, imagesList, linksList)
     }
 
-    //adds the items to our recyclerview
+    //adds item to the UI tiles
     private fun addToList(title: String, description: String, image: String, link: String) {
         linksList.add(link)
         titlesList.add(title)
