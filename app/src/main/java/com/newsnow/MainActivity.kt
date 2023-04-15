@@ -103,8 +103,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
-        binding.tvNoInternetCountDown.layoutManager = LinearLayoutManager(applicationContext)
-        binding.tvNoInternetCountDown.adapter = RecyclerAdapter(titlesList, descList, imagesList, linksList)
+        binding.rvRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+        binding.rvRecyclerView.adapter = RecyclerAdapter(titlesList, descList, imagesList, linksList)
     }
 
     //adds the items to our recyclerview

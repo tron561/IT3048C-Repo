@@ -29,7 +29,7 @@ class RecyclerAdapter(
         //takes care of click events
         init {
             itemView.setOnClickListener { v: View ->
-                val position: Int = adapterPosition
+                val position: Int = absoluteAdapterPosition
 
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = Uri.parse(links[position])
