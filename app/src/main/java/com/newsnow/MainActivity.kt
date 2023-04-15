@@ -9,13 +9,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.newsnow.RecyclerAdapter
+import com.newsnow.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 
 const val BASE_URL = "https://api.currentsapi.services"
 
@@ -28,24 +28,30 @@ class MainActivity : AppCompatActivity() {
     private var descList = mutableListOf<String>()
     private var imagesList = mutableListOf<String>()
     private var linksList = mutableListOf<String>()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.rvRecyclerView
+        binding.vBlackScreen
+        binding.progressBar
+        binding.tvNoInternetCountDown
         makeAPIRequest()
     }
 
     //simple fade in animation for when the app is done loading
     private fun fadeIn() {
-        v_blackScreen.animate().apply {
-            alpha(0f)
+        binding.vBlackScreen.animate().apply {
+            alpha(0)
             duration = 3000
         }.start()
     }
 
     //requests data from the api and forwards it to the recycler view
     private fun makeAPIRequest() {
-        progressBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
 
         val api = Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -66,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     setUpRecyclerView()
                     fadeIn()
-                    progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
                 }
             } catch (e: Exception) {
                 Log.d("MainActivity", e.toString())
@@ -84,12 +90,12 @@ class MainActivity : AppCompatActivity() {
             override fun onFinish() {
                 makeAPIRequest()
                 countdownTimer.cancel()
-                tv_noInternetCountDown.visibility = View.GONE
+                binding.tvNoInternetCountDown.visibility = View.GONE
                 this@MainActivity.seconds+=3
             }
             override fun onTick(millisUntilFinished: Long) {
-                tv_noInternetCountDown.visibility = View.VISIBLE
-                tv_noInternetCountDown.text = "Cannot retrieve data...\nTrying again in: ${millisUntilFinished/1000}"
+                binding.tvNoInternetCountDown.visibility = View.VISIBLE
+                binding.tvNoInternetCountDown.text = "Cannot retrieve data...\nTrying again in: ${millisUntilFinished/1000}"
                 Log.d("MainActivity", "Could not retrieve data. Trying again in ${millisUntilFinished/1000} seconds")
             }
         }
@@ -97,8 +103,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
-        rv_recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-        rv_recyclerView.adapter = RecyclerAdapter(titlesList, descList, imagesList, linksList)
+        binding.tvNoInternetCountDown.layoutManager = LinearLayoutManager(applicationContext)
+        binding.tvNoInternetCountDown.adapter = RecyclerAdapter(titlesList, descList, imagesList, linksList)
     }
 
     //adds the items to our recyclerview
