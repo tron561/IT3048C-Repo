@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     //fade in animation from bumptech
     private fun fadeIn() {
         binding.vBlackScreen.animate().apply {
-            alpha(0)
+            alpha(0f)
             duration = 3000
         }.start()
     }
