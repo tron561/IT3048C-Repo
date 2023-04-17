@@ -1,14 +1,10 @@
 package com.newsnow
-import android.graphics.Color.alpha
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.newsnow.RecyclerAdapter
 import com.newsnow.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -63,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
                 for (article in response.news) {
                     Log.d("MainActivity", "Result + $article")
-                    addToList(article.title, article.description, article.image, article.url)
+                    addToUITile(article.title, article.description, article.image, article.url)
                 }
 
                 //updates ui when data has been retrieved
@@ -105,8 +101,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvRecyclerView.adapter = RecyclerAdapter(titlesList, descList, imagesList, linksList)
     }
 
-    //adds item to the UI tiles
-    private fun addToList(title: String, description: String, image: String, link: String) {
+    private fun addToUITile(title: String, description: String, image: String, link: String) {
         linksList.add(link)
         titlesList.add(title)
         descList.add(description)
