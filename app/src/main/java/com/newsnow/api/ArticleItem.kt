@@ -1,6 +1,6 @@
 package com.newsnow.api
 
-data class New(
+data class ArticleItem(
     val author: String,
     val category: List<String>,
     val description: String,

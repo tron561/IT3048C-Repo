@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         makeAPIRequest()
     }
 
-    //fade in animation from bumptech
     private fun fadeIn() {
         binding.vBlackScreen.animate().apply {
             alpha(0f)
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         }.start()
     }
 
-    //requests data from the API via Retrofit
     private fun makeAPIRequest() {
         binding.progressBar.visibility = View.VISIBLE
 
