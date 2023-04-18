@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private var linksList = mutableListOf<String>()
     private lateinit var binding: ActivityMainBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         makeAPIRequest()
     }
 
-    private fun fadeIn() {
+    fun fadeIn() {
         binding.vBlackScreen.animate().apply {
             alpha(0f)
             duration = 3000
