@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 const val apiKey: String = BuildConfig.API_KEY
 
-interface CurrentsAPIReq {
+interface APIRequest {
 
     //API Key is exclusive to account hedgesaj@mail.uc.edu
         @GET("/v1/latest-news?language=en&apiKey=$apiKey")
