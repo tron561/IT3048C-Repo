@@ -10,9 +10,27 @@ import org.junit.runner.RunWith
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
+/*import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
+import com.newsnow.service.ArticleService
+import com.newsnow.dto.Article
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.impl.annotations.MockK
+import junit.framework.Assert.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.*
+import org.junit.rules.TestRule
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList*/
+
 @RunWith(AndroidJUnit4::class)
 class ArticleUnitTests {
-    /*@get:Rule var rule: TestRule = InstantTaskExecutorRule()
+   /* @get:Rule var rule: TestRule = InstantTaskExecutorRule()
 
     lateinit var mvm : MainViewModel
 
