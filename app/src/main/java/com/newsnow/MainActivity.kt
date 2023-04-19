@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(CurrentsAPIReq::class.java)
+            .create(APIRequest::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
             try {
