@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         binding.vBlackScreen
         binding.progressBar
         binding.tvNoInternetCountDown
+        binding.bottomNavigation
         makeAPIRequest()
 
         val infoFragment = InfoFragment()
@@ -46,7 +47,8 @@ class MainActivity : AppCompatActivity() {
 
         makeCurrentFragment(loginFragment)
 
-        bottom_navigation.setOnNavigationItemSelectedListener {
+
+        binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.ic_info -> makeCurrentFragment(infoFragment)
                 R.id.ic_login -> makeCurrentFragment(loginFragment)
