@@ -18,13 +18,13 @@ const val BASE_URL = "https://api.currentsapi.services"
 class MainActivity : AppCompatActivity() {
 
     lateinit var countdownTimer: CountDownTimer
-    private var seconds = 3L
+    var seconds = 3L
 
-    private var titlesList = mutableListOf<String>()
-    private var descList = mutableListOf<String>()
-    private var imagesList = mutableListOf<String>()
-    private var linksList = mutableListOf<String>()
-    private lateinit var binding: ActivityMainBinding
+    var titlesList = mutableListOf<String>()
+    var descList = mutableListOf<String>()
+    var imagesList = mutableListOf<String>()
+    var linksList = mutableListOf<String>()
+    lateinit var binding: ActivityMainBinding
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         }.start()
     }
 
-    private fun makeAPIRequest() {
+    fun makeAPIRequest() {
         binding.progressBar.visibility = View.VISIBLE
 
         val api = Retrofit.Builder()
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun attemptRequestAgain(seconds: Long) {
+    fun attemptRequestAgain(seconds: Long) {
         countdownTimer = object: CountDownTimer(seconds*1010,1000){
             override fun onFinish() {
                 makeAPIRequest()
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvRecyclerView.adapter = RecyclerAdapter(titlesList, descList, imagesList, linksList)
     }
 
-    private fun addToUITile(title: String, description: String, image: String, link: String) {
+    fun addToUITile(title: String, description: String, image: String, link: String) {
         linksList.add(link)
         titlesList.add(title)
         descList.add(description)
