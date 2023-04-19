@@ -14,7 +14,7 @@ import retrofit2.Response
 class NewsNowUnitTests {
 
     @Mock
-    private lateinit var api: CurrentsAPIReq
+    private lateinit var api: APIRequest
 
     @Test
     suspend fun testMakeApiRequest() {
