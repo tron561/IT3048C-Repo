@@ -8,10 +8,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
-import retrofit2.Response
 
 @RunWith(AndroidJUnit4::class)
 class NewsNowUnitTests {
+
+
 
     @Mock
     private lateinit var api: APIRequest
