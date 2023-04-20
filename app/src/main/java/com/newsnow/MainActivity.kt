@@ -1,15 +1,14 @@
 package com.newsnow
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.Fragment
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.newsnow.databinding.ActivityMainBinding
-import com.newsnow.fragments.InfoFragment
-import com.newsnow.fragments.LoginFragment
-import com.newsnow.fragments.MoreFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -39,31 +38,10 @@ class MainActivity : AppCompatActivity() {
         binding.progressBar
         binding.tvNoInternetCountDown
         binding.bottomNavigation
+        binding.bottomNavigation
         makeAPIRequest()
 
-        val infoFragment = InfoFragment()
-        val loginFragment = LoginFragment()
-        val moreFragment = MoreFragment()
-
-        makeCurrentFragment(loginFragment)
-
-
-        binding.bottomNavigation.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.ic_info -> makeCurrentFragment(infoFragment)
-                R.id.ic_login -> makeCurrentFragment(loginFragment)
-                R.id.ic_more -> makeCurrentFragment(moreFragment)
-            }
-            true
-        }
-
     }
-    private fun makeCurrentFragment(fragment : Fragment) =
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_wrapper, fragment)
-            commit()
-        }
-
 
     fun fadeIn() {
         binding.vBlackScreen.animate().apply {
