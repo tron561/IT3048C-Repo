@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "345466562203",
+    "project_id": "newsnow-327d0",
+    "storage_bucket": "newsnow-327d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345466562203:android:8bc156e10a4173a964483e",
+        "android_client_info": {
+          "package_name": "com.newsnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345466562203-o3e2tg7fs50tqtun8gf7e45hvgln1c8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvKysBdqpFEQHx2ghmUdzH8r6_rKTjT9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345466562203-o3e2tg7fs50tqtun8gf7e45hvgln1c8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
