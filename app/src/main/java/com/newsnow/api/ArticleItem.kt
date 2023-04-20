@@ -1,6 +1,7 @@
 package com.newsnow.api
 
 data class ArticleItem(
+    //Article details captured from API
     val author: String,
     val category: List<String>,
     val description: String,

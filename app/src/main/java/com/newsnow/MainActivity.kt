@@ -36,11 +36,14 @@ class MainActivity : AppCompatActivity() {
     var linksList = mutableListOf<String>()
     lateinit var binding: ActivityMainBinding
 
-    private val CHANNEL_ID = "channel_id_example_1"
+    private val CHANNEL_ID = "RootKitChannel"
     private val notificationID = 100
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Binding function looks to XML files and brings the attributes to the MainActivity
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.rvRecyclerView
@@ -51,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         createNotificationChannel()
     }
 
+//Notification Channel creation for devices with API 13 and above
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             val name = "Notification Tile"
@@ -62,6 +66,7 @@ class MainActivity : AppCompatActivity() {
             val notificationManager : NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 
+    //Builder function for RootKit detection push notification
     private fun sendNotification() {
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -69,6 +74,8 @@ class MainActivity : AppCompatActivity() {
             .setContentTitle("We've detected a RootKit on your system, thus this app is unable to be launched.")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
     }
+
+    //Graceful fade in function to delay UI initializing
     fun fadeIn() {
         binding.vBlackScreen.animate().apply {
             alpha(0f)
@@ -76,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         }.start()
     }
 
+    //Creates API request to CurrentsAPI to gather items such as Article Title, Picture, Description
     fun makeAPIRequest() {
         binding.progressBar.visibility = View.VISIBLE
 
@@ -111,12 +119,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //If call to API failed, this function attempts again while displaying a countdown timer
     fun attemptRequestAgain(seconds: Long) {
         countdownTimer = object : CountDownTimer(seconds * 1010, 1000) {
             override fun onFinish() {
                 makeAPIRequest()
                 countdownTimer.cancel()
                 binding.tvNoInternetCountDown.visibility = View.GONE
+                //If countdown timer ends, it begins again and adds 3 seconds
                 this@MainActivity.seconds += 3
             }
 
@@ -133,12 +143,14 @@ class MainActivity : AppCompatActivity() {
         countdownTimer.start()
     }
 
+    //Starts the overall build of the UI
     private fun setUpRecyclerView() {
         binding.rvRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
         binding.rvRecyclerView.adapter =
             RecyclerAdapter(titlesList, descList, imagesList, linksList)
     }
 
+    //Adds data from our API to the various cards in the UI
     fun addToUITile(title: String, description: String, image: String, link: String) {
         linksList.add(link)
         titlesList.add(title)
@@ -146,6 +158,7 @@ class MainActivity : AppCompatActivity() {
         imagesList.add(image)
     }
 
+    //Checks device to see if directories below exist (common directories created by RootKits)
     private fun detectForSUBinaries(): Boolean {
         var suBinaries: Array<String> = arrayOf(
             "/system/bin/su",
@@ -157,6 +170,7 @@ class MainActivity : AppCompatActivity() {
             "/system/xbin/mu"
         )
 
+        //If found, logs a RootKit warning, shows push notification and force closes the app
         for (bin in suBinaries) {
             if (File(bin).exists()) {
                 Log.d("RootkitWarning", "Rootkit detected on host device. MainActivity aborted.")
