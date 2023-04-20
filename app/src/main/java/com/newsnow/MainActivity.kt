@@ -37,8 +37,6 @@ class MainActivity : AppCompatActivity() {
         binding.vBlackScreen
         binding.progressBar
         binding.tvNoInternetCountDown
-        binding.bottomNavigation
-        binding.bottomNavigation
         makeAPIRequest()
 
     }
